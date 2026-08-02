@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - Library Management System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h2>📚 Library MS</h2>
+        <span>Member Portal</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="active" data-section="catalog">📖 Browse Catalog</a>
+        <a data-section="mybooks">📚 My Books</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info" id="userInfo"></div>
+        <button class="btn btn-secondary btn-sm" style="width:100%" onclick="API.logout()">Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section id="catalog" class="section active">
+        <div class="page-header">
+          <h1>Book Catalog</h1>
+          <p>Browse available books and request to borrow</p>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="toolbar">
+              <input type="text" id="bookSearch" placeholder="Search books..." oninput="loadCatalog()">
+              <select id="bookCategory" onchange="loadCatalog()">
+                <option value="">All Categories</option>
+              </select>
+            </div>
+            <div id="catalogTable"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="mybooks" class="section">
+        <div class="page-header">
+          <h1>My Books</h1>
+          <p>Track your borrowed books and due dates</p>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div id="myBooksTable"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/user.js"></script>
+</body>
+</html>

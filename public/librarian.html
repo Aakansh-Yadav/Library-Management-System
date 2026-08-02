@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librarian Dashboard - Library Management System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h2>📚 Library MS</h2>
+        <span>Librarian Portal</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="active" data-section="overview">📊 Overview</a>
+        <a data-section="books">📖 Book Management</a>
+        <a data-section="issues">🔄 Issue / Return</a>
+        <a data-section="users">👥 User Management</a>
+        <a data-section="records">📋 Records</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info" id="userInfo"></div>
+        <button class="btn btn-secondary btn-sm" style="width:100%" onclick="API.logout()">Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <!-- Overview -->
+      <section id="overview" class="section active">
+        <div class="page-header">
+          <h1>Dashboard Overview</h1>
+          <p>Monitor library operations at a glance</p>
+        </div>
+        <div class="stats-grid" id="statsGrid"></div>
+      </section>
+
+      <!-- Books -->
+      <section id="books" class="section">
+        <div class="page-header">
+          <h1>Book Management</h1>
+          <p>Add, update, and remove books from the catalog</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Book Catalog</h3>
+            <button class="btn btn-accent btn-sm" onclick="openBookForm()">+ Add Book</button>
+          </div>
+          <div class="card-body">
+            <div class="toolbar">
+              <input type="text" id="bookSearch" placeholder="Search by title, author, or ISBN..." oninput="loadBooks()">
+              <select id="bookCategory" onchange="loadBooks()">
+                <option value="">All Categories</option>
+              </select>
+            </div>
+            <div id="booksTable"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Issues -->
+      <section id="issues" class="section">
+        <div class="page-header">
+          <h1>Issue / Return Tracking</h1>
+          <p>Manage book lending and returns</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Issue Records</h3>
+            <button class="btn btn-accent btn-sm" onclick="openIssueForm()">+ Issue Book</button>
+          </div>
+          <div class="card-body">
+            <div class="toolbar">
+              <select id="issueStatus" onchange="loadIssues()">
+                <option value="">All Status</option>
+                <option value="issued">Issued</option>
+                <option value="returned">Returned</option>
+              </select>
+            </div>
+            <div id="issuesTable"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Users -->
+      <section id="users" class="section">
+        <div class="page-header">
+          <h1>User Management</h1>
+          <p>Manage library member profiles and access</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Registered Users</h3>
+            <button class="btn btn-accent btn-sm" onclick="openUserForm()">+ Add User</button>
+          </div>
+          <div class="card-body">
+            <div id="usersTable"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Records -->
+      <section id="records" class="section">
+        <div class="page-header">
+          <h1>Record Maintenance</h1>
+          <p>Transaction logs and system activity</p>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>Activity Log</h3></div>
+          <div class="card-body">
+            <div class="toolbar">
+              <select id="recordAction" onchange="loadRecords()">
+                <option value="">All Actions</option>
+                <option value="create">Create</option>
+                <option value="update">Update</option>
+                <option value="delete">Delete</option>
+                <option value="issue">Issue</option>
+                <option value="return">Return</option>
+                <option value="login">Login</option>
+              </select>
+            </div>
+            <div id="recordsTable"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/librarian.js"></script>
+</body>
+</html>
